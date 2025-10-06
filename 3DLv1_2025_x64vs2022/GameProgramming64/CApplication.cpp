@@ -5,6 +5,8 @@
 #include "CTriangle.h"
 //OpenGL
 #include "glut.h"
+//モデルデータの指定
+#define MODEL_OBJ "res\\obj.obj", "res\\obj.mtl"
 
 
 #define SOUND_BGM "res\\mario.wav" //BGM音声ファイル
@@ -26,6 +28,8 @@ CCharacterManager* CApplication::CharacterManager()
 void CApplication::Start()
 {
 	mEye = CVector(1.0f, 2.0f, 3.0f);
+	//モデルファイルの入力
+	mModel.Load(MODEL_OBJ);
 
 
 }
