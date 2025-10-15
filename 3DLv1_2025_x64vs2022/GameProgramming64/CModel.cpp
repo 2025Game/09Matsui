@@ -6,6 +6,8 @@
 //Load(ƒ‚ƒfƒ‹ƒtƒ@ƒCƒ‹–¼, ƒ}ƒeƒŠƒAƒ‹ƒtƒ@ƒCƒ‹–¼)
 void CModel::Load(const char* obj, const char* mtl) {//’¸“_ƒf[ƒ^‚Ì•Û‘¶(CVectorŒ^)
 	std::vector<CVector> vertex;
+	std::vector<CVector> normal;
+
 
 	//ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^•Ï”‚Ìì¬
 	FILE* fp;
@@ -71,8 +73,15 @@ void CModel::Load(const char* obj, const char* mtl) {//’¸“_ƒf[ƒ^‚Ì•Û‘¶(CVectorŒ
 			//OŠpŒ`ì¬
 			CTriangle t;
 			t.Vertex(vertex[v[0] - 1], vertex[v[1] - 1], vertex[v[2] - 1]);
+			t.Normal(normal[n[0] - 1], normal[n[1] - 1], normal[n[2] - 1]);
 			//‰Â•Ï’·”z—ñmTriangles‚ÉOŠpŒ`‚ğ’Ç‰Á
 			mTriangles.push_back(t);
+
+			if (strcmp(str[0], "vn") == 0) {
+				//‰Â•Ï’·”z—ñvertex‚É’Ç‰Á
+				//atof(•¶š—ñ)@•¶š—ñ‚©‚çfloatŒ^‚Ì’l‚ğ•Ô‚·
+				normal.push_back(CVector(atof(str[1]), atof(str[2]), atof(str[3])));
+			}
 		}
 
 	}
