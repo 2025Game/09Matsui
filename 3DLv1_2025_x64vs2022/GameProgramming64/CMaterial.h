@@ -1,12 +1,14 @@
+#pragma once
 #ifndef CMATERIAL_H
 #define CMATERIAL_H
-#define MATERIAL_NAME_LEN 64 //名前の長さ
+#define MATERIAL_NAME_LEN 64//名前の長さ
 
 /*
 マテリアルクラス
-マテリアルのデータを扱う
+マテリアルのデータを使う
 */
-class CMaterial {
+class CMaterial
+{
 public:
 	//デフォルトコンストラクタ
 	CMaterial();
@@ -14,15 +16,12 @@ public:
 	void Enabled();
 	//マテリアルの名前の取得
 	char* Name();
-	//マテリアルの名前を設定する
-	//Name(マテリアルの名前)
+	//マテリアルの名前を取得する
+	//NAME(マテリアルの名前)
 	void Name(char* name);
 	//mDiffuse配列の取得
 	float* Diffuse();
 private:
-	//マテリアルポインタの可変長配列
-	std::vector<CMaterial*> mpMaterials;
-
 	//マテリアル名
 	char mName[MATERIAL_NAME_LEN + 1];
 	//拡散光の色RGBA
@@ -30,4 +29,4 @@ private:
 };
 
 #endif
-#pragma once
+
