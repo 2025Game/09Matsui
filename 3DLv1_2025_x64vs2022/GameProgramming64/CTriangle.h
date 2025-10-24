@@ -8,6 +8,8 @@
 class CTriangle
 {
 public:
+	//UV設定
+	void UV(const CVector& v0, const CVector& v1, const CVector& v2);
 	//頂点座標設定
 	//Vertex(頂点1,頂点２,頂点３)
 	void Vertex(const CVector& v0, const CVector& v1, const CVector& v2);
@@ -24,6 +26,7 @@ public:
 	//描画
 	void Render();
 private:
+	CVector mUv[3]; //テクスチャマッピング
 	CVector mV[3];//頂点座標
 	CVector mN[3];//法線
 	int mMaterialIdx;//マテリアル番号

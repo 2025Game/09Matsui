@@ -29,6 +29,8 @@ public:
 	//繰り返し実行するプログラム
 	void Update();
 private:
+	CModel mBackGround; //背景モデル
+
 
 	//モデルクラスのインスタンス作成
 	CModel mModel;
