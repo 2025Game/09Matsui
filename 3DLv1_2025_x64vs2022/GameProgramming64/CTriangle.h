@@ -8,6 +8,10 @@
 class CTriangle
 {
 public:
+	//•`‰æ
+//Render(s—ñ)
+	void Render(const CMatrix& m);
+
 	//UVİ’è
 	void UV(const CVector& v0, const CVector& v1, const CVector& v2);
 	//’¸“_À•Wİ’è
