@@ -53,6 +53,6 @@ private:
 	static CTexture mTexture;
 	CEnemy* mpEnemy;
 	CCharacter3 mCharacter;
-	CCharacter3 mPlayer;
+	CPlayer mPlayer;
 
 };
