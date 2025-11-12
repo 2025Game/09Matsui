@@ -11,6 +11,7 @@
 #include "CVector.h"
 #include "CModel.h"
 #include "CMatrix.h"
+#include "CCharacter3.h"
 
 class CApplication
 {
@@ -51,4 +52,7 @@ private:
 	CBullet* mpBullet;
 	static CTexture mTexture;
 	CEnemy* mpEnemy;
+	CCharacter3 mCharacter;
+	CCharacter3 mPlayer;
+
 };
