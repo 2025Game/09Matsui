@@ -113,9 +113,11 @@ void CApplication::Update()
 	
 
 
+	//タスクマネージャの更新
+	mTaskManager.Update();
+	//タスクマネージャの描画
+	mTaskManager.Render();
 
-	mPlayer.bullet.Update();
-	mPlayer.bullet.Render();
 
 
 
@@ -131,6 +133,11 @@ void CApplication::Update()
 
 }
 
+CTaskManager CApplication::mTaskManager;
+CTaskManager* CApplication::TaskManager()
+{
+	return &mTaskManager;
+}
 
 	
 
