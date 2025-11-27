@@ -114,11 +114,14 @@ void CApplication::Update()
 
 
 
-
+	mPlayer.bullet.Update();
+	mPlayer.bullet.Render();
 
 
 
 	mBackGround.Render();
+
+	
 
 	
 
