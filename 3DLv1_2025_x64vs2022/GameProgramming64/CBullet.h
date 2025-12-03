@@ -4,12 +4,14 @@
 #include "CCharacter3.h"
 //三角形クラスのインクルード
 #include "CTriangle.h"
+#include "CCollider.h"
 
 /*
 弾クラス
 三角形を飛ばす
 */
-class CBullet : public CCharacter3 {
+class CBullet : public CCharacter3
+{
 public:
 	CBullet();
 
@@ -26,6 +28,7 @@ private:
 
 	//三角形
 	CTriangle mT;
+	CCollider mCollider;
 };
 
 #endif
