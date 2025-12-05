@@ -52,7 +52,7 @@ void CTaskManager::Render()
 }
 void CTaskManager::Remove(CTask* task) {
 	//タスクの前の次を、タスクの次にする
-	task->mpPrev->mpNext = task->mpNext;
+ 	task->mpPrev->mpNext = task->mpNext;
 	//タスクの次の前を、タスクの前にする
 	task->mpNext->mpPrev = task->mpPrev;
 }
@@ -70,3 +70,16 @@ void CTaskManager::Delete() {
 	}
 }
 
+//タスクマネージャのインスタンス
+CTaskManager* CTaskManager::mpInstance = nullptr;
+
+//インスタンスの取得
+CTaskManager* CTaskManager::Instance()
+{
+	//インスタンスが無ければ
+	if (mpInstance == nullptr)
+	{	//インスタンスを生成する
+		mpInstance = new CTaskManager();
+	}
+	return mpInstance;
+}

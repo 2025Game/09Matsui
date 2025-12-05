@@ -17,7 +17,6 @@
 class CApplication
 {
 public:
-	static CTaskManager* TaskManager();
 
 	static CTexture* Texture();
 	static CCharacterManager* CharacterManager();
@@ -36,8 +35,6 @@ public:
 private:
 	//C5ƒ‚ƒfƒ‹
 	CModel mModelC5;
-
-	static CTaskManager mTaskManager;
 
 	CModel mBackGround; //”wŒiƒ‚ƒfƒ‹
 
