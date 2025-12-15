@@ -5,12 +5,15 @@
 //モデルクラスのインクルード
 #include "CModel.h"
 #include "CTask.h"
+class CCollider;
 /*
 キャラクタークラス
 ゲームキャラクタの基本的な機能を定義する
 */
 class CCharacter3 : public CTransform, public CTask {
 public:
+	//衝突処理
+	virtual void Collision(CCollider* m, CCollider* o) {}
 	//コンストラクタ
 	CCharacter3();
 
@@ -25,6 +28,9 @@ public:
 protected:
 	CModel* mpModel; //モデルのポインタ
 };
+//コライダクラスの宣言
+class CCollider;
+
 
 #endif
 #pragma once
