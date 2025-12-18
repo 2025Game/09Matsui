@@ -12,6 +12,8 @@ public:
 	//衝突処理
 //Collision(コライダ1, コライダ2)
 	void Collision(CCollider* m, CCollider* o);
+	//エフェクト生成
+
 
 	//コンストラクタ
 	//CEnemy(モデル, 位置, 回転, 拡縮)
