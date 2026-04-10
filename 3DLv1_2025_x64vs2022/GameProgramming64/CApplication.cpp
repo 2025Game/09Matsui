@@ -49,7 +49,7 @@ void CApplication::Start()
 	//敵機のインスタンス作成
 	new CEnemy(&mModelC5, CVector(0.0f, 10.0f, -100.0f),
 		CVector(), CVector(0.1f, 0.1f, 0.1f));
-	new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -130.0f),
+	new CEnemy(&mModelC5, CVector(30.0f, 10.0f, 130.0f),
 		CVector(), CVector(0.1f, 0.1f, 0.1f));
 
 
