@@ -13,6 +13,8 @@ CXPlayer::CXPlayer()
 	mpState = mpIdle.get();
 	mpState->Start(this);
 	mState = mpState->State();
+	//歩䛟状態䛾作成
+	mpWalk = std::make_unique<CPlayerWalk>();
 
 }
 // 重力
@@ -24,6 +26,22 @@ void CXPlayer::Update()
 	mPosition = mPosition -CVector(0.0f, GRAVITY, 0.0f);
 	//親クラスの更新
 	CXCharacter::Update();
+	//状態䛾切り替え
+	if (mState != mpState->State())
+	{
+		mState = mpState->State();
+		switch (mState) {
+		case EState::EIDLE:
+			mpState = mpIdle.get();
+			break;
+		case EState::EWALK:
+			mpState = mpWalk.get();
+			break;
+		default:
+			break;
+		}
+		mpState->Start(this);
+	}
 }
 void CXPlayer::Collision(CCollider* m, CCollider* o)
 {

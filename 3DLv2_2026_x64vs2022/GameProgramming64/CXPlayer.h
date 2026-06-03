@@ -5,6 +5,7 @@
 #include "CColliderLine.h"
 #include "CState.h"
 #include "CPlayerIdle.h"
+#include "CPlayerWalk.h"
 
 class CXPlayer : public CXCharacter
 {
@@ -18,6 +19,7 @@ public:
 	//衝突処理
 	void Collision();
 private:
+	std::unique_ptr<CPlayerWalk> mpWalk; //歩䛟状態
 	EState mState; //状態䛾保持
 	CState* mpState; //状態処理
 	std::unique_ptr<CPlayerIdle> mpIdle; //待機状態
