@@ -1,8 +1,10 @@
-#pragma once
+ï»¿#pragma once
 #ifndef CXPLAYER_H
 #define CXPLAYER_H
 #include "CXCharacter.h"
 #include "CColliderLine.h"
+#include "CState.h"
+#include "CPlayerIdle.h"
 
 class CXPlayer : public CXCharacter
 {
@@ -10,10 +12,15 @@ public:
      CXPlayer();
 	CColliderLine mColliderLine;
 	void Update() override;
-	//Õ“Ëˆ—
-//Collision(ƒRƒ‰ƒCƒ_1, ƒRƒ‰ƒCƒ_2)
+	//è¡çªå‡¦ç†
+//Collision(ã‚³ãƒ©ã‚¤ãƒ€1, ã‚³ãƒ©ã‚¤ãƒ€2)
 	void Collision(CCollider* m, CCollider* o);
-	//Õ“Ëˆ—
+	//è¡çªå‡¦ç†
 	void Collision();
+private:
+	EState mState; //çŠ¶æ…‹ä›¾ä¿æŒ
+	CState* mpState; //çŠ¶æ…‹å‡¦ç†
+	std::unique_ptr<CPlayerIdle> mpIdle; //å¾…æ©ŸçŠ¶æ…‹
+
 };
 #endif
