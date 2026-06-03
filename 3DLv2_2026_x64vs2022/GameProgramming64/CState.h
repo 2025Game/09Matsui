@@ -7,6 +7,7 @@ enum class EState
 	ENONE, //状態䛺し
 	EIDLE, //待機
 	EWALK, //歩き
+	EATTACK, //攻撃
 };
 class CState
 {

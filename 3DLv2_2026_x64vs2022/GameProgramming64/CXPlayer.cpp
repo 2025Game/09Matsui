@@ -15,6 +15,7 @@ CXPlayer::CXPlayer()
 	mState = mpState->State();
 	//歩䛟状態䛾作成
 	mpWalk = std::make_unique<CPlayerWalk>();
+	mpAttack = std::make_unique<CPlayerAttack>();
 
 }
 // 重力
@@ -36,6 +37,9 @@ void CXPlayer::Update()
 			break;
 		case EState::EWALK:
 			mpState = mpWalk.get();
+			break;
+		case EState::EATTACK:
+			mpState = mpAttack.get();
 			break;
 		default:
 			break;

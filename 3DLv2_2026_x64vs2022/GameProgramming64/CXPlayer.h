@@ -6,6 +6,7 @@
 #include "CState.h"
 #include "CPlayerIdle.h"
 #include "CPlayerWalk.h"
+#include "CPlayerAttack.h"
 
 class CXPlayer : public CXCharacter
 {
@@ -23,6 +24,8 @@ private:
 	EState mState; //状態䛾保持
 	CState* mpState; //状態処理
 	std::unique_ptr<CPlayerIdle> mpIdle; //待機状態
+	std::unique_ptr<CPlayerAttack> mpAttack; //待機状態
+
 
 };
 #endif

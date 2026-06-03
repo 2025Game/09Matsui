@@ -39,4 +39,8 @@ void CPlayerWalk::Start(CXCharacter* parent)
 			//Wキー䛜押䛥れ䛶い䛺い䛸䛝䛿待機状態䛻䛩る
 			mState = EState::EIDLE;
 		}
+		if (mInput.Key('I'))
+		{
+			mState = EState::EATTACK;
+		}
 	}
