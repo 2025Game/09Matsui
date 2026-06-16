@@ -33,6 +33,10 @@ void CPlayerWalk::Start(CXCharacter* parent)
 					CVector(0.0f, -ROTATIONSPEED, 0.0f);
 				mpParent->Rotation(r);
 			}
+			if (mInput.Key(' '))
+			{
+				mState = EState::EJUMP;
+			}
 		}
 		else
 		{

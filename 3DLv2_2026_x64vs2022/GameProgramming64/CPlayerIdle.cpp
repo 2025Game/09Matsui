@@ -33,4 +33,8 @@ void CPlayerIdle::Update()
 	{
 		mState = EState::EATTACK;
 	}
+	if (mInput.Key(' '))
+	{
+		mState = EState::EJUMP;
+	}
 }
