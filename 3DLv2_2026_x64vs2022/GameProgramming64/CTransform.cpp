@@ -1,4 +1,15 @@
-#include "CTransform.h"
+﻿#include "CTransform.h"
+
+CTransform::CTransform()
+	:mpParent(nullptr)
+{
+	
+}
+
+const CMatrix& CTransform::CombinedMatrix() const
+{
+	return mCombinedMatrix;
+}
 
 const CVector& CTransform::Position() const
 {
@@ -39,19 +50,30 @@ void CTransform::Update(const CVector& pos, const CVector& rot
 	Update();
 }
 
-//�s��X�V����
+//行列更新処理
 void CTransform::Update() {
-	//�g��k���s��̐ݒ�
+	//拡大縮小行列の設定
 	mMatrixScale.Scale(mScale.X(), mScale.Y(), mScale.Z());
-	//��]�s��̐ݒ�
+	//回転行列の設定
 	mMatrixRotate =
 		CMatrix().RotateZ(mRotation.Z()) *
 		CMatrix().RotateX(mRotation.X()) *
 		CMatrix().RotateY(mRotation.Y());
-	//���s�ړ��s��̐ݒ�
+	//平行移動行列の設定
 	mMatrixTranslate.Translate(mPosition.X(), mPosition.Y(), mPosition.Z());
-	//�����s��̐ݒ�
+	//合成行列の設定
 	mMatrix = mMatrixScale * mMatrixRotate * mMatrixTranslate;
+	//合成行列䛾設定
+//子䛻引䛝継䛠合成行列䛿回転䛸移動䛾み
+	mCombinedMatrix = mMatrixRotate * mMatrixTranslate;
+	//親䛜いる場合䛿、親䛾合成行列を掛䛡る
+	if (mpParent) {
+		mCombinedMatrix = mCombinedMatrix *
+			mpParent->mCombinedMatrix;
+
+	}
+	//自分䛜使用䛩る合成行列䛻䛿、拡大縮小行列を掛䛡る
+	mMatrix = mMatrixScale * mCombinedMatrix;
 }
 const CVector& CTransform::Rotation() const
 {

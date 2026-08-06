@@ -64,11 +64,20 @@ void CXPlayer::Collision(CCollider* m, CCollider* o)
 		{
 			CVector adjust;//調整用ベクトル
 			//三角形と線分の衝突判定
-			if (CCollider::CollisionTriangleLine(
-				o, m, &adjust))
+			if (CCollider::CollisionTriangleLine(o, m, &adjust))
 			{
-				//位置の更新(mPosition + adjust)
-				mPosition = mPosition + adjust;
+				//位置䛾更新
+//現在䛾ワールド䛷䛾位置
+				mPosition = (CVector() * mMatrix + adjust);
+				if (o->Parent())
+				{
+					//親䛾ローカル座標へ変換
+					mPosition = mPosition *
+						o->Parent()->CombinedMatrix().Inverse();
+
+				}
+				//親䛾設定
+				mpParent = o->Parent();
 				//行列の更新
 				CTransform::Update();
 			}
