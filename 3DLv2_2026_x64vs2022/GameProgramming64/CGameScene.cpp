@@ -18,9 +18,8 @@ void CGameScene::Load()
 	
 	mBackGround.Load(MODEL_BACKGROUND);
 	mPlayer.Load(MODEL_FILE);
-	CCharacter3* cube = new CCube();
-	cube->Position(CVector(0.0f, 0.0f, -9.0f));
-	cube->Scale(CVector(10.0f, 0.5f, 10.0f));
+
+	
 	
 	//キャラクタのインスタンス作成
 	CCharacter3* character = new CCharacter3();
@@ -29,6 +28,9 @@ void CGameScene::Load()
 	CXCharacter* xchar = new CXPlayer();
 	xchar->Init(&mPlayer);
 	mColliderMesh.Set(nullptr, nullptr, &mBackGround);
+	CCharacter3* cube = new CCube();
+	cube->Position(CVector(0.0f, 0.0f, -9.0f));
+	cube->Scale(CVector(10.0f, 0.5f, 10.0f));
 }
 void CGameScene::Update()
 {
