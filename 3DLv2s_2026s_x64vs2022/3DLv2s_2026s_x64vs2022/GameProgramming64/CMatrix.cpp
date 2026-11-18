@@ -6,6 +6,12 @@
 //数学関数のインクルード
 #include <math.h>
 
+int CMatrix::Size()
+{
+	return sizeof(mM) / sizeof(float);
+}
+
+
 CMatrix CMatrix::Transpose() const
 {
 	CMatrix tmp; //返却用のCMatrixインスタンスを作成
