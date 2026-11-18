@@ -3,6 +3,10 @@
 #include "CModelX.h"
 #include "glut.h"
 #include <ctype.h>	//isspace関数の宣言
+char* CModelX::Token()
+{
+	return mToken;
+}
 
 
 /*
@@ -166,6 +170,10 @@ CModelXFrame::~CModelXFrame()
 	}
 	//名前のエリアを解放する
 	SAFE_DELETE_ARRAY(mpName);
+	if (mpMesh != nullptr)
+	{
+		delete mpMesh;
+	}
 }
 /*
  CModelXFrame
@@ -177,6 +185,7 @@ CModelXFrame::~CModelXFrame()
 CModelXFrame::CModelXFrame(CModelX* model)
 	: mpName(nullptr)
 	, mIndex(0)
+	,mpMesh(nullptr)
 {
 	//現在のフレーム配列の要素数を取得し設定する
 	mIndex = model->mFrame.size();
@@ -212,6 +221,11 @@ CModelXFrame::CModelXFrame(CModelX* model)
 			}
 			model->GetToken(); // }
 		}
+		else if (strcmp(model->mToken, "Mesh") == 0) {
+			mpMesh = new CMesh();
+			mpMesh->Init(model);
+		}
+
 
 
 		else {
@@ -223,6 +237,70 @@ CModelXFrame::CModelXFrame(CModelX* model)
 #ifdef _DEBUG
 	printf("%s\n", mpName);
 	mTransformMatrix.Print();
+	
 #endif
 }
+//コンストラクタ
+CMesh::CMesh()
+	: mVertexNum(0)
+	, mpVertex(nullptr)
+	, mFaceNum(0)
+	, mpVertexIndex(nullptr)
+
+{}
+
+//デストラクタ
+CMesh::~CMesh() {
+	SAFE_DELETE_ARRAY(mpVertex);
+	SAFE_DELETE_ARRAY(mpVertexIndex);
+
+}
+
+/*
+ Init
+ Meshのデータを取り込む
+*/
+void CMesh::Init(CModelX* model) {
+	model->GetToken();	// { or 名前
+	if (!strchr(model->Token(), '{')) {
+		//名前の場合、次が{
+		model->GetToken();	// {
+	}
+
+	//頂点数の取得
+	mVertexNum = atoi(model->GetToken());
+	//頂点数分エリア確保
+	mpVertex = new CVector[mVertexNum];
+	//頂点数分データを取り込む
+	for (int i = 0; i < mVertexNum; i++) {
+		mpVertex[i].X(atof(model->GetToken()));
+		mpVertex[i].Y(atof(model->GetToken()));
+		mpVertex[i].Z(atof(model->GetToken()));
+	}
+	//面数読み込み
+	mFaceNum = atoi(model->GetToken());
+	//頂点数は1面に3頂点
+	mpVertexIndex = new int[mFaceNum * 3];
+	for (int i = 0; i < mFaceNum * 3; i += 3) {
+		model->GetToken();	//頂点数読み飛ばし
+		mpVertexIndex[i] = atoi(model->GetToken());
+		mpVertexIndex[i + 1] = atoi(model->GetToken());
+		mpVertexIndex[i + 2] = atoi(model->GetToken());
+	}
+
+
+
+#ifdef _DEBUG
+	printf(" VertexNum:%d\n", mVertexNum);
+	for (int i = 0; i < mVertexNum; i++) {
+		printf("%10f %10f %10f\n", mpVertex[i].X(), mpVertex[i].Y(), mpVertex[i].Z());
+	}
+	printf("FaceNum:%d\n", mFaceNum);
+	for (int i = 0; i < mFaceNum * 3; i += 3) {
+		printf("%d %d %d\n", mpVertexIndex[i], mpVertexIndex[i + 1], mpVertexIndex[i + 2]);
+
+	}
+#endif
+}
+
 
